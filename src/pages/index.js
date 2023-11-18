@@ -2,8 +2,14 @@ import Head from "next/head";
 import Header from "../components/Header.js";
 import Banner from "../components/Banner.js";
 import ProductFeed from "../components/ProductFeed.js";
+import { useSession, signIn, signOut } from "next-auth/react"
 
 export default function Home({ products }) {
+
+
+
+
+
   return (
     <div>
       <Head>
