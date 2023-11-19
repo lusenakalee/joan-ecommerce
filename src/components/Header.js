@@ -35,7 +35,7 @@ function Header () {
                   type="text"
                   className="p-2 h-full w-6 flex-grow flex-shrink rounded-l-md focus:outline-none px-4"
                />
-               <MagnifyingGlassIcon className="h-12 p-4 " />-
+               <MagnifyingGlassIcon className="h-12 p-4 " />
             </button>
             <div className="text-white flex items-center text-xs space-x-6 mx-6 whitespace-nowrap">
                <div onClick={ !session ? signIn : signOut } className="link">

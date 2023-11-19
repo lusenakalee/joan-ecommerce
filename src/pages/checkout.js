@@ -4,9 +4,12 @@ import Image from 'next/image'
 import { useSelector } from 'react-redux';
 import { selectItems, selectTotal } from '../slices/basketSlice';
 import CheckoutProduct from '../components/CheckoutProduct';
-import Currency from "react-currency-formatter"
 import { useSession } from 'next-auth/react';
+import { loadStripe } from '@stripe/stripe-js';
 
+
+
+const stripePromise = loadStripe(process.env.stripe_public_key);
 
 function checkout() {
   const items = useSelector(selectItems);
@@ -14,6 +17,18 @@ function checkout() {
 
 
   const { data: session } = useSession();
+
+  const createCheckoutSession = async () => {
+    const stripe = await stripePromise;
+
+    const checkoutSession = await axios.post('/api/create-checkout-session', 
+    {
+      items: items,
+      email: session
+    })
+
+
+  }
 
 
 
@@ -24,7 +39,7 @@ function checkout() {
       {/* left */}
       <div className='flex-grow m-5 shadow-sm'>
         <Image
-        src="https://links.papareact.com/ikj"
+        src="/images/banner1.png"
         width={1028}
         height={250}
         objectFit='contain'
@@ -60,10 +75,12 @@ function checkout() {
             <>
             <h2 className='whitespace-nowrap'>Subtotal( {items.length} items): {" "}
             <span className='font-bold'>
-             <Currency quantity={total} currency='KES' /> 
+             Ksh.{total}
             </span>
             </h2>
             <button 
+            role='link'
+            onClick={createCheckoutSession}
             disabled={!session}
             className={`button mt-2 ${!session && "from-gray-300 to-gray-500 border-gray-200 text-gray-300 cursor-not-allowed "}`}>
               {!session ? 'Sign in to checkout' : 'Proceed to Checkout'}
