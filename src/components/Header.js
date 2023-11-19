@@ -14,6 +14,8 @@ import { selectItems } from '../slices/basketSlice'
 function Header () {
    const router = useRouter();
    const items = useSelector(selectItems);
+   const { data: session } = useSession();
+
 
    return (
       <header>
@@ -36,9 +38,9 @@ function Header () {
                <MagnifyingGlassIcon className="h-12 p-4 " />-
             </button>
             <div className="text-white flex items-center text-xs space-x-6 mx-6 whitespace-nowrap">
-               <div onClick={signIn} className="link">
+               <div onClick={ !session ? signIn : signOut } className="link">
                   <p>
-                     Hello Leroy 
+                     {session ? `Hello ,${session.user.name}` :  "SignIn"}
                   </p>
                   <p className="font-extrabold md:text-sm">Account & Lists</p>
                </div>

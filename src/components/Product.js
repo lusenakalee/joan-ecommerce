@@ -3,6 +3,8 @@ import Image from "next/image"
 import React, { useState } from 'react'
 import { useDispatch } from "react-redux"
 import {addToBasket} from "../slices/basketSlice";
+import Currency from "react-currency-formatter"
+
 
 
 const MAX_RATING = 5
@@ -55,7 +57,7 @@ const Product = ({ id, title, price, description, category, image }) => {
          <p className="text-xs my-2 line-clamp-2">{description}</p>
 
          <div className="mb-5">
-            <p>$ {price}</p>
+            <p>                <Currency quantity={price} currency='KES' /></p>
          </div>
          {hasPrime && (
             <div className="flex items-center space-x-2 -mt-5">
