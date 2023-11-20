@@ -23,8 +23,11 @@ export default function Home({ products }) {
 }
 
 export async function getServerSideProps(context) {
-  const products = await fetch("https://fakestoreapi.com/products")
+  const products = await fetch("https://elegancetest.onrender.com/cat")
     .then(res => res.json())
+
+    console.log("Fetched products:", products);
+
 
   return {
     props: {
