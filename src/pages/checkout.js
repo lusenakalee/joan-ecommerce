@@ -6,6 +6,7 @@ import { selectItems, selectTotal } from '../slices/basketSlice';
 import CheckoutProduct from '../components/CheckoutProduct';
 import { useSession } from 'next-auth/react';
 import { loadStripe } from '@stripe/stripe-js';
+import axios from 'axios';
 
 
 
@@ -24,11 +25,11 @@ function checkout() {
     const checkoutSession = await axios.post('/api/create-checkout-session', 
     {
       items: items,
-      email: session
-    })
+      email: session.user.email,
+    });
 
 
-  }
+  };
 
 
 
