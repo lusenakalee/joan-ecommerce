@@ -3,6 +3,7 @@ import Image from "next/image";
 import React, { useState } from "react";
 import { useDispatch } from "react-redux";
 import { addToBasket } from "../slices/basketSlice";
+import Link from "next/link";
 
 const MAX_RATING = 5;
 const MIN_RATING = 1;
@@ -59,6 +60,8 @@ const Product = ({ id, title, price, description, category, image, name }) => {
           <p className="text-xs text-gray-500">FREE Next day Delivery</p>
         </div>
       )}
+      <Link>  <h2>View details</h2></Link>
+    
 
       <button onClick={addItemToBasket} className="mt-auto button">
         Add To Basket
